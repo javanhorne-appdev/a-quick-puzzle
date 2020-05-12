@@ -4,43 +4,51 @@
   Your guesses:
 </p>
 
-<!-- Loop over all of the user's guesses here -->
+
+<% if @guess != nil%>
+<% @guess.each do |index| %>
+<%if (index.fetch("first_num") < index.fetch("second_num")) && (index.fetch("second_num") < index.fetch("third_num"))%>
 <p class="lead">
   <span class="badge badge-success">
-    3
+  <%=index.fetch("first_num")%>
+
   </span>
 
   <span class="badge badge-success">
-    6
+     <%=index.fetch("second_num")%>
   </span>
 
   <span class="badge badge-success">
-    12
+      <%=index.fetch("third_num")%>
   </span>
 
   <span class="text-success">
       Yes!
   </span>
 </p>
-
+<% else %>
 <p class="lead">
   <span class="badge badge-danger">
-    3
+  <%=index.fetch("first_num")%>
+
   </span>
 
   <span class="badge badge-danger">
-    2
+     <%=index.fetch("second_num")%>
   </span>
 
   <span class="badge badge-danger">
-    1
+      <%=index.fetch("third_num")%>
   </span>
 
   <span class="text-danger">
-      No.
+      No!
   </span>
 </p>
-<!-- End loop -->
+<% end %>
+<% end %>
+<% end %>
+
 
 <p class="lead"><strong>Enter a sequence to test:</strong></p>
 
