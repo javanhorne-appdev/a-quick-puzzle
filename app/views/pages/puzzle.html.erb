@@ -1,11 +1,12 @@
 <%= render({ :partial => "pages/intro.html.erb" })%>
 
+<% if @guess != nil%>
 <p class="lead">
   Your guesses:
 </p>
 
 
-<% if @guess != nil%>
+
 <% @guess.each do |index| %>
 <%if (index.fetch("first_num") < index.fetch("second_num")) && (index.fetch("second_num") < index.fetch("third_num"))%>
 <p class="lead">
@@ -42,7 +43,7 @@
   </span>
 
   <span class="text-danger">
-      No!
+      No.
   </span>
 </p>
 <% end %>
@@ -78,19 +79,35 @@
 
 <hr>
 
+
+<% if @guess != nil%>
 <p class="lead">When you think you know the rule, describe it in words below and then submit
 your answer. <strong>Make sure you’re right; you won’t get a second
 chance.</strong></p>
 
-<!-- Form for guess goes here -->
 
+<!-- Form for guess goes here -->
+<form action="/create_guess" method="post">
+<div class="form-group">
+  <label for="final_guess">My guess at the rule</label>
+  <textarea id="final_guess" name="final_rule" placeholder="Enter your guess when you're ready" class="form-control"></textarea>
+</div>
+  <button>
+    Check
+  </button>
+</form>
+<%end%>
+
+<% if @final_guess != nil%>
 <hr>
 
 
 <h2>Your guess was:</h2>
 
 <p class="lead">
-  Doubling numbers
+ <%=@final_guess%>
 </p>
 
 <%= render({ :partial => "pages/outro.html.erb" }) %>
+
+<%end%>

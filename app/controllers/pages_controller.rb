@@ -3,6 +3,9 @@ class PagesController < ApplicationController
     if session.fetch(:user_guess) != nil
       @guess = session.fetch(:user_guess)
     end
+    if cookies.fetch(:final_guess) != nil
+      @final_guess = cookies.fetch(:final_guess)
+    end
     render({ :template => "pages/puzzle.html.erb" })
   end
   
@@ -25,6 +28,14 @@ class PagesController < ApplicationController
     session.store(:user_guess, guess)
 
 
+    redirect_to("/")
+  end
+
+  def write_cookie2
+    #Parameters: {"first_num"=>"1", "second_num"=>"2", "third_num"=>"3"}
+
+
+    cookies.store(:final_guess, params.fetch("final_rule"))
     redirect_to("/")
   end
 end
